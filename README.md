@@ -1,7 +1,43 @@
-# CarND-Controls-PID
-Self-Driving Car Engineer Nanodegree Program
-
+## Self-Driving Car Engineer Nanodegree Program
+## Term 2 Project 4
+### PID Controller Project
 ---
+### Writeup Template
+
+
+The goals / steps of this project are the following:
+
+- Write a PID controller in C++
+- Use the simulator to generate test data to test the PID controller
+
+**Brief explanation of PID Controller**
+
+***Definition***
+A proportional–integral–derivative controller (PID controller or three term controller) is a control loop feedback mechanism widely used in industrial control systems and a variety of other applications requiring continuously modulated control. A PID controller continuously calculates an error value e ( t ) {\displaystyle e(t)} e(t) as the difference between a desired setpoint (SP) and a measured process variable (PV) and applies a correction based on proportional, integral, and derivative terms (denoted P, I, and D respectively) which give the controller its name. 
+
+The three terms of a PID controller can be explained as below :
+
+* P - Proportional Term :
+This term will be proportional to the cross train error(cte) which is basically the difference between your current value and the value you want to achieve. 
+In this case, the value we want to achieve is the middle of the road. The more is the difference between these two, the higher is this term. THis means that 
+the more distance is the vehicle from the center of the lane, the more correction it makes and tries to steer to the middle.
+Though this term tries to minimize the difference, it results in osciallations as it tries to correct till it reaches the middle lane, and then it overshoots.
+Hence it results in slight oscillations. When this term is higher, the oscillations will be higher, and when it is lower, the car will correct itself slowly
+
+* I - Integration Term :
+This term accounts for past values of cte and integrates them over time. This takes care of the drift in the vehicle and smoothens the curve as it reaches the required value.
+Let's assume the car has a drift and does not turn as expected with the steering angle. In this case, the cte is higher with time, and when you sum up all the cte's over time, the 
+value is larger and hence it tries to correct itself over what is the current steering angle thus taking care of the drift
+
+* D - Differential Term :
+In order to prevent overshooting, the differential term is introduced. This is the best estimate of the future trend of cte, based on its current rate of change. As the vehicle is 
+correcting itself towards the center of the lane, it calculates the rate of change of cte and adjusts itself so that the vehicle doesn't overshoot and thus prevent oscillations and achieve
+a smooth transition
+
+Mathematical representation of PID controller :
+
+![PID Controller Math Equation][./writeup/PIDeq.jpg]
+
 
 ## Dependencies
 
