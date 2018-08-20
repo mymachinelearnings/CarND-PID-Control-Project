@@ -34,9 +34,21 @@ In order to prevent overshooting, the differential term is introduced. This is t
 correcting itself towards the center of the lane, it calculates the rate of change of cte and adjusts itself so that the vehicle doesn't overshoot and thus prevent oscillations and achieve
 a smooth transition
 
-Mathematical representation of PID controller :
+**Mathematical representation of PID controller :**
 
 ![PID Controller Math Equation](writeup/PIDeq.jpg)
+
+**Parameter Tuning :**
+
+I tuned the parameters manually and haven't used twiddle method as auto tuning is leading to crashes sometimes if the values are not set accurately, and I had to restart the 
+simulator from start. I've taken the output values from twiddle and worked from there.
+
+I observed values of `Kp = 0.2, Kd=10.0, Ki=0.004" to be working well. I didn't observe any drift, but set a very minimal value just in case. 
+I have increased the throttle to 0.6 when the steering angle is almost 0 which means its a straight line. In all other cases, this value will be 0.3
+
+**Possible enhancements :**
+
+One enhancement I could think of is to have an automated formula for throttle based on the angle.
 
 ## Dependencies
 

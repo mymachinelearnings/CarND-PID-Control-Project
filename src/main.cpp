@@ -28,14 +28,15 @@ std::string hasData(std::string s) {
   return "";
 }
 
-int main(int argc, char *argv[])
+//int main(int argc, char *argv[])
+int main()
 {
   uWS::Hub h;
 
   PID pid;
-  double init_kp = atof(argv[1]);
-  double init_ki = atof(argv[2]);
-  double init_kd = atof(argv[3]);
+  double init_kp = 0.2; //atof(argv[1]);
+  double init_ki = 0.004; //atof(argv[2]);
+  double init_kd = 10.0; //atof(argv[3]);
   pid.Init(init_kp, init_ki, init_kd);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -69,7 +70,12 @@ int main(int argc, char *argv[])
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
+          //This means it is almost straight
+          if (steer_value < 0.01)
+        	  msgJson["throttle"] = 0.5;
+          else
+        	  msgJson["throttle"] = 0.3;
+
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
