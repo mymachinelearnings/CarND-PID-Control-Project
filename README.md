@@ -36,8 +36,7 @@ a smooth transition
 
 Mathematical representation of PID controller :
 
-![PID Controller Math Equation][./writeup/PIDeq.jpg]
-
+![PID Controller Math Equation](writeup/PIDeq.jpg)
 
 ## Dependencies
 
